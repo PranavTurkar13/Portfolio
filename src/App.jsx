@@ -90,8 +90,8 @@ const App = () => {
       }}>
               <p className='text-2xl tracking-widest text-gray-300'>Hi, I'M</p>
               <h1 className='text-9xl font-bold tracking-wide mt-1'>PRANAV <br/> TURKAR</h1>
-              <p className='text-4xl text-purple-500 tracking-widest mt-2'>Full Stack Developer</p>
-              <p className='text-2xl text-gray-800 mt-3 max-w-xs leading-wildest'>
+              <p className='text-4xl text-purple-500 tracking-widest [-webkit-text-stroke:1px_rgba(200,200,200,0.8)] mt-2'>Full Stack Developer</p>
+              <p className='text-2xl text-gray-800 mt-3 max-w-xs [-webkit-text-stroke:1px_rgba(255,255,255,0.25)] leading-wildest'>
                 I build things for the web.
               </p>
               <div className='flex gap-4 mt-6'>
