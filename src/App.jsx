@@ -3,6 +3,8 @@ import { useGSAP } from '@gsap/react';
 import gsap from "gsap";
 import Navbar from './components/Navbar';
 import 'remixicon/fonts/remixicon.css'
+import WantedLevel from './components/WantedLevel';
+import HUD from './components/HUD';
 
 const App = () => {
   const [showContent, setShowContent] = useState(false)
@@ -30,6 +32,17 @@ const App = () => {
       }
     })
   })
+
+  useGSAP(() => {
+   const main = document.querySelector(".main");
+   main?.addEventListener("mousemove",function(e){
+    const xMove = (e.clientX / window.innerWidth -0.5)*20;
+    gsap.to(".imagesdiv .hero",{x:`${xMove * 0.4}%`});
+    gsap.to(".imagesdiv .clouds", {x:xMove});
+    gsap.to(".imagesdiv .back" ,{x:xMove});
+   })
+
+  }, [showContent]);
   return (
     <>
       <div className='svg flex items-center justify-center w-full h-screen overflow-hidden fixed top-0 left-0 z-[100] bg-[#000]'>
@@ -62,12 +75,14 @@ const App = () => {
       </div>
       {showContent && 
       (<div className='main w-full'>
-        <div className='landing w-full h-screen bg-black'> 
+        <WantedLevel/>
+        <HUD />
+        <div className='landing w-full h-screen bg-black overflow-hidden'> 
           <Navbar />
           <div className='imagesdiv relative w-full h-screen'>
-            <img className='absolute top-0 left-0 w-full h-full object-cover' src="./clouds.png" alt="" />
-            <img className='absolute top-0 left-0 w-full h-full object-cover'  src="./bg.png" alt="" />
-            <div className='absolute top-1/2 left-40 -translate-y-1/2 z-10 text-white'>
+            <img className='clouds absolute scale-[1.2] top-0 left-0 w-full h-full object-cover' src="./clouds.png" alt="" />
+            <img className='back absolute scale-[1.2] top-0 left-0 w-full h-full object-cover'  src="./bg.png" alt="" />
+            <div className='hero absolute top-1/2 left-40 -translate-y-1/2 z-10 text-white'>
               <p className='text-2xl tracking-widest text-gray-300'>Hi, I'M</p>
               <h1 className='text-9xl font-bold tracking-wide mt-1'>PRANAV <br/> TURKAR</h1>
               <p className='text-4xl text-purple-500 tracking-widest mt-2'>Full Stack Developer</p>
