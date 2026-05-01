@@ -13,12 +13,12 @@ const App = () => {
 
     t1.to("#vi-mask-group",{
       rotate:10,
-      duration:2,
+      duration:3,
       transformOrigin:"50% 50%",
       ease:"Power4.easeInOut"
     }).to("#vi-mask-group",{
       scale:10,
-      duration:2,
+      duration:3,
       delay:-1.8,
       ease:"Expo.easeInOut",
       transformOrigin:"50% 50%",
