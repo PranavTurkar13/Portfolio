@@ -82,18 +82,28 @@ const App = () => {
           <div className='imagesdiv relative w-full h-screen'>
             <img className='clouds absolute scale-[1.2] top-0 left-0 w-full h-full object-cover' src="./clouds.png" alt="" />
             <img className='back absolute scale-[1.2] top-0 left-0 w-full h-full object-cover'  src="./bg.png" alt="" />
-            <div className='hero absolute top-1/2 left-40 -translate-y-1/2 z-10 text-white'>
+            <div className='hero absolute top-1/2 left-40 -translate-y-1/2 z-10 text-white px-8 py-6 rounded-2xl' style={{
+        background: "rgba(255, 255, 255, 0.08)",
+        backdropFilter: "blur(14px)",
+        WebkitBackdropFilter: "blur(14px)",
+        borderBottom: "1px solid rgba(255, 255, 255, 0.15)",
+      }}>
               <p className='text-2xl tracking-widest text-gray-300'>Hi, I'M</p>
               <h1 className='text-9xl font-bold tracking-wide mt-1'>PRANAV <br/> TURKAR</h1>
               <p className='text-4xl text-purple-500 tracking-widest mt-2'>Full Stack Developer</p>
-              <p className='text-2xl text-black mt-3 max-w-xs leading-wildest'>
+              <p className='text-2xl text-gray-800 mt-3 max-w-xs leading-wildest'>
                 I build things for the web.
               </p>
               <div className='flex gap-4 mt-6'>
-                <button className='px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-full text-lg tracking-widest transition-all duration-300'>
+                <button className='px-6 py-2 bg-gray-300 hover:bg-gray-900 text-black hover:text-white rounded-full text-lg tracking-widest transition-all duration-300'>
                   View Missions
                 </button>
-                <button className='px-6 py-2 border border-white hover:bg-white hover:text-black text-white rounded-full text-lg tracking-widest transition-all duration-300'>
+                <button className='px-6 py-2 border border-white hover:bg-white hover:text-black text-white rounded-full text-lg tracking-widest transition-all duration-300' style={{
+                    background: "rgba(255, 255, 255, 0.08)",
+                    backdropFilter: "blur(7px)",
+                    WebkitBackdropFilter: "blur(7px)",
+                    borderBottom: "1px solid rgba(255, 255, 255, 0.15)",
+                  }}>
                   Resume
                 </button>
               </div>
