@@ -5,6 +5,8 @@ import Navbar from './components/Navbar';
 import 'remixicon/fonts/remixicon.css'
 import WantedLevel from './components/WantedLevel';
 import HUD from './components/HUD';
+import About from './components/About';
+import Skills from './components/Skills';
 
 const App = () => {
   const [showContent, setShowContent] = useState(false)
@@ -34,6 +36,37 @@ const App = () => {
   })
 
   useGSAP(() => {
+    if(!showContent) return;
+    gsap.to(".main",{
+      rotate:0,
+      scale:1,
+      duration:2,
+      delay:-1,
+      ease:"Expo.easeInOut",
+    })
+    gsap.to(".back",{
+      rotate:0,
+      scale:1,
+      duration:2,
+      delay:-.8,
+      ease:"Expo.easeInOut",
+    })
+    gsap.to(".clouds",{
+      rotate:0,
+      scale:1,
+      duration:2,
+      delay:-.8,
+      ease:"Expo.easeInOut",
+    })
+    gsap.to(".character",{
+      rotate:0,
+      scale:1,
+      w:"-40%",
+      bottom:"0%",
+      duration:2,
+      delay:-.8,
+      ease:"Expo.easeInOut",
+    })
    const main = document.querySelector(".main");
    main?.addEventListener("mousemove",function(e){
     const xMove = (e.clientX / window.innerWidth -0.5)*20;
@@ -74,14 +107,15 @@ const App = () => {
         </svg>
       </div>
       {showContent && 
-      (<div className='main w-full'>
+      (
+      <>
+        <Navbar />
+        <div className='main w-full rotate-[-10deg] scale-[1.7]'>
         <WantedLevel/>
-        <HUD />
-        <div className='landing w-full h-screen bg-black overflow-hidden'> 
-          <Navbar />
+        <div id="home" className='landing w-full h-screen bg-black overflow-hidden'> 
           <div className='imagesdiv relative w-full h-screen'>
-            <img className='clouds absolute scale-[1.2] top-0 left-0 w-full h-full object-cover' src="./clouds.png" alt="" />
-            <img className='back absolute scale-[1.2] top-0 left-0 w-full h-full object-cover'  src="./bg.png" alt="" />
+            <img className='clouds absolute scale-[1.2] rotate-[-15deg] top-0 left-0 w-full h-full object-cover' src="./clouds.png" alt="" />
+            <img className='back absolute scale-[1.8] rotate-[-3] top-0 left-0 w-full h-full object-cover'  src="./bg.png" alt="" />
             <div className='hero absolute top-1/2 left-40 -translate-y-1/2 z-10 text-white px-8 py-6 rounded-2xl' style={{
         background: "rgba(255, 255, 255, 0.08)",
         backdropFilter: "blur(14px)",
@@ -108,9 +142,8 @@ const App = () => {
                 </button>
               </div>
             </div>
-            <img className='absolute bottom-0 right-25 w-[40%] max-w-[400px] object-contain object-bottom' src="./character_gta.png" alt="" />
-          </div>
-          <div className='absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent'>
+            <img className='character absolute bottom-[-40%] right-25 w-[40%] max-w-[400px] scale-[2] object-contain object-bottom' src="./character_gta.png" alt="" />
+            <div className='absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent'>
             <div className='scroll absolute bottom-0 left-0 flex items-center gap-3 text-white px-5'>
               <i className="ri-arrow-down-circle-line text-2xl"></i>
               <div className='text-md font-["Helvetica"]'> Scroll Down</div>
@@ -118,9 +151,14 @@ const App = () => {
             <div className='absolute top-[85%] left-1/2 -translate-x-1/2 -translate-y-1/2'>
               <img className='h-[38px]' src="ps5.png" alt="" />
             </div>
+            <HUD />
+          </div>
           </div>
         </div>
-      </div>)}
+        <About/>
+        <Skills />
+      </div>
+      </>)}
     </>
   )
 }

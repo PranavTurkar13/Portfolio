@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from "gsap";
 
-const navItems = ["Home","About me", "Skills", "Projects", "Contact"];
+const navItems = [
+  { label: "Home", id: "home" },
+  { label: "About me", id: "about" },
+  { label: "Skills", id: "skills" },
+  { label: "Projects", id: "projects" },
+  { label: "Contact", id: "contact" },
+];
 
 const Navbar = () => {
 
@@ -19,7 +25,7 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    gsap.fromTo(logoRef.current, { rotation: -180, opacity: 0, scale: 0.5 }, { rotation: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.7)", delay: 0.2 });
+    gsap.fromTo(logoRef.current, { rotation: -90, opacity: 0, scale: 0.5 }, { rotation: 0, opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.7)", delay: 0.2 });
   }, []);
 
   const handleLogoHover = () => {
@@ -30,10 +36,50 @@ const Navbar = () => {
     gsap.to(logoRef.current, {  scale: 1, duration: 0.4, ease: "power2.inOut" });
   };
 
-  const handleLinkClick = (label, index) => {
-    setActive(label);
-    gsap.fromTo(linksRef.current[index], { scale: 0.9 }, { scale: 1, duration: 0.3, ease: "back.out(2)" });
-  };
+  useEffect(() => {
+      const handleScroll = () => {
+        const sections = navItems.map(item =>
+          document.getElementById(item.id)
+        );
+
+        const scrollY = window.scrollY + 100; // offset for navbar
+
+        sections.forEach((section, index) => {
+          if (!section) return;
+
+          const top = section.offsetTop;
+          const height = section.offsetHeight;
+
+          if (scrollY >= top && scrollY < top + height) {
+            setActive(navItems[index].label);
+          }
+        });
+      };
+
+      window.addEventListener("scroll", handleScroll);
+
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    const handleLinkClick = (item, index) => {
+      setActive(item.label);
+
+      
+      gsap.fromTo(
+        linksRef.current[index],
+        { scale: 0.9 },
+        { scale: 1, duration: 0.3, ease: "back.out(2)" }
+      );
+
+      const section = document.getElementById(item.id);
+      if (section) {
+        gsap.to(window, {
+          duration: 1,
+          scrollTo: section,
+          ease: "power2.out",
+        });
+      }
+    };
 
   return (
     <nav
@@ -63,29 +109,29 @@ const Navbar = () => {
       </div>
 
       <ul className="flex items-center gap-8 list-none">
-        {navItems.map((label, index) => (
+        {navItems.map((item,index) => (
           <li
             key={index}
             ref={(el) => (linksRef.current[index] = el)}
-            onClick={() => handleLinkClick(label, index)}
+            onClick={() => handleLinkClick(item, index)}
             className="relative cursor-pointer"
           >
             <span
-              className="text-white tracking-widest transition-colors duration-200"
+              className="text-white tracking-wildest transition-colors duration-200"
               style={{
                 fontSize: "20px",
                 letterSpacing: "3px",
-                opacity: active === label ? 1 : 0.9,
-                color: active === label ? "#a855f7" : "white",
+                opacity: active === item.label ? 1 : 0.9,
+                color: active === item.label ? "#a855f7" : "white",
               }}
             >
-              {label}
+              {item.label}
             </span>
             <span
               className="absolute bottom-[-4px] left-0 h-[2px] rounded-full transition-all duration-300"
               style={{
                 background: "#a855f7",
-                width: active === label ? "100%" : "0%",
+                width: active === item.label ? "100%" : "0%",
                 boxShadow: "0 0 8px #a855f7",
               }}
             />
