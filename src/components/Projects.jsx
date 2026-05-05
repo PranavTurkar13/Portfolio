@@ -65,8 +65,13 @@ const Projects = () => {
             <div key={project.id} className='reveal border border-[#1a1a1a] bg-[#0f0f0f] group hover:border-purple-500 transition-all duration-300 relative overflow-hidden flex flex-col'>
               <div className='absolute top-0 left-0 right-0 h-[2px] bg-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300'></div>
 
-              <div className='w-full h-[140px] bg-[#111] relative flex items-center justify-center overflow-hidden'>
-                <span className='text-[80px] font-black text-[#161616] leading-none select-none'>{String(project.id).padStart(2, '0')}</span>
+              <div className='w-full h-[140px] relative overflow-hidden bg-[#111]'>
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className='w-full h-full object-cover object-top opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500'
+                />
+                <div className='absolute inset-0 bg-gradient-to-t from-[#0f0f0f] to-transparent'/>
                 <div className='absolute top-3 left-3 bg-purple-500 text-white text-[8px] tracking-[3px] px-2 py-1'>{project.mission}</div>
                 <div className={`absolute top-3 right-3 text-[7px] tracking-[2px] px-2 py-1 border ${statusStyle(project.status)}`}>● {project.status}</div>
               </div>

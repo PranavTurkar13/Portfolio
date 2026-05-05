@@ -1,6 +1,7 @@
 export const projects = [
   {
     id: 1,
+    image:"/projects/csps.png",
     mission: "MISSION 01",
     category: "FULL STACK",
     title: "CENTRALISED PLACEMENT PORTAL",
@@ -14,6 +15,7 @@ export const projects = [
   },
   {
     id: 2,
+    image:"/projects/das.png",
     mission: "MISSION 02",
     category: "FULL STACK",
     title: "DOCTOR APPOINTMENT BOOKING",
@@ -27,6 +29,7 @@ export const projects = [
   },
   {
     id: 3,
+    image:"/projects/mrs.png",
     mission: "MISSION 03",
     category: "MACHINE LEARNING",
     title: "MOVIE RECOMMENDER SYSTEM",
@@ -39,6 +42,7 @@ export const projects = [
   },
   {
     id: 4,
+    image:"/projects/pt.png",
     mission: "MISSION 04",
     category: "FRONTEND",
     title: "PLAYTUNES — SPOTIFY CLONE",
@@ -51,6 +55,7 @@ export const projects = [
   },
   {
     id: 5,
+    image:"/projects/fifa.png",
     mission: "MISSION 05",
     category: "PYTHON + DATABASE",
     title: "FIFA FOOTBALL MANAGER",
@@ -63,6 +68,7 @@ export const projects = [
   },
   {
     id: 6,
+    image:"/projects/ems.png",
     mission: "MISSION 06",
     category: "FRONTEND",
     title: "EMPLOYEE PORTAL",
