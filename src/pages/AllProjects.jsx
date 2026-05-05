@@ -29,7 +29,7 @@ const AllProjects = () => {
     const elements = containerRef.current.querySelectorAll(".reveal")
     elements.forEach((el, i) => {
       gsap.fromTo(el,
-        { filter: "blur(8px)", y: 20 },
+        { y: 10 },
         {
           filter: "blur(0px)", y: 0,
           duration: 0.5,
