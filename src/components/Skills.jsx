@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react"
 import { useState } from "react"
 import { FaReact, FaNodeJs, FaPython, FaJava, FaGitAlt, FaHtml5, FaCss3Alt } from 'react-icons/fa'
 import { SiMongodb, SiExpress, SiTailwindcss, SiJavascript, SiMysql, SiJsonwebtokens, SiPostman, SiGithub, SiVercel, SiRender } from 'react-icons/si'
-import { VscVscode } from 'react-icons/vsc'
+
 
 gsap.registerPlugin(ScrollTrigger);
 

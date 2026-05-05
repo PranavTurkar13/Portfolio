@@ -11,6 +11,7 @@ import Skills from '../components/Skills';
 import Projects from '../components/Projects'; 
 import {  useEffect } from 'react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Contact from '../components/Contact';
 
 const Home = () => {
   
@@ -137,6 +138,7 @@ const Home = () => {
             <About/>
             <Skills/>
             <Projects/> 
+            <Contact />
           </div>
         </>
       )}
