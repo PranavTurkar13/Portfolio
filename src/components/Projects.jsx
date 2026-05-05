@@ -39,6 +39,9 @@ const Projects = () => {
   })
 
   setTimeout(() => ScrollTrigger.refresh(), 200)
+  return () => {
+    ScrollTrigger.getAll().forEach(t => t.kill())
+  }
 
 }, { scope: containerRef, dependencies: [] })
 

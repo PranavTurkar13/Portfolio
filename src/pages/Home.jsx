@@ -9,11 +9,13 @@ import HUD from '../components/HUD';
 import About from '../components/About';
 import Skills from '../components/Skills';
 import Projects from '../components/Projects'; 
-import { useNavigate } from 'react-router-dom';
+import {  useEffect } from 'react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const Home = () => {
-  const navigate = useNavigate()
+  
   const [showContent, setShowContent] = useState(false)
+  const [showSVG, setShowSVG] = useState(true)
 
   useGSAP(()=>{
     let t1 = gsap.timeline();
@@ -28,7 +30,7 @@ const Home = () => {
       opacity:0,
       onUpdate: function(){
         if(this.progress() >= 0.9){
-          document.querySelector(".svg").remove();
+          setShowSVG(false)
           setShowContent(true);
           this.kill();
         }
@@ -52,23 +54,33 @@ const Home = () => {
     })
   }, [showContent]);
 
+  useEffect(() => {
+  return () => {
+    gsap.killTweensOf("*")
+    ScrollTrigger.getAll().forEach(t => t.kill())
+  }
+}, [])
+
   return (
     <>
-      <div className='svg flex items-center justify-center w-full h-screen overflow-hidden fixed top-0 left-0 z-[100] bg-[#000]'>
-        <svg viewBox='0 0 800 600' preserveAspectRatio='xMidYMid slice'>
-          <defs>
-            <mask id="viMask">
-              <rect width="100%" height="100%" fill='black' />
-              <g id="vi-mask-group">
-                <text x="50%" y="50%" fontSize="250" textAnchor='middle' fill='white' dominantBaseline='middle' fontFamily='Arial Black'>
-                  VI
-                </text>
-              </g>
-            </mask>
-          </defs>
-          <image href="./bg.png" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" mask="url(#viMask)" />
-        </svg>
-      </div>
+      {showSVG && (
+        <div className='svg flex items-center justify-center w-full h-screen overflow-hidden fixed top-0 left-0 z-[100] bg-[#000]'>
+                <svg viewBox='0 0 800 600' preserveAspectRatio='xMidYMid slice'>
+                <defs>
+                    <mask id="viMask">
+                    <rect width="100%" height="100%" fill='black' />
+                    <g id="vi-mask-group">
+                        <text x="50%" y="50%" fontSize="250" textAnchor='middle' fill='white' dominantBaseline='middle' fontFamily='Arial Black'>
+                        VI
+                        </text>
+                    </g>
+                    </mask>
+                </defs>
+                <image href="./bg.png" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" mask="url(#viMask)" />
+                </svg>
+        </div>
+      )}
+      
 
       {showContent && (
         <>
