@@ -66,7 +66,7 @@ const Skills = () => {
     const elements = containerRef.current.querySelectorAll(".reveal")
     elements.forEach((el, i) => {
       gsap.fromTo(el,
-        { opacity: 0, filter: "blur(10px)", y: 30 },
+        { opacity: 0, filter: "blur(10px)", y: 10 },
         {
           opacity: 1, filter: "blur(0px)", y: 0,
           duration: 0.8,
@@ -191,25 +191,12 @@ const Skills = () => {
             </div>
 
             {/* stat boxes */}
-            <div className='reveal grid grid-cols-3 gap-3 mt-2'>
-              <div className='border border-[#1a1a1a] border-t-purple-500 border-t-2 p-4 bg-[#0f0f0f]'>
-                <p className='text-3xl text-white'>16+</p>
-                <p className='text-[8px] text-[#333] tracking-[3px] mt-2'>TOTAL WEAPONS</p>
-              </div>
-              <div className='border border-[#1a1a1a] border-t-purple-500 border-t-2 p-4 bg-[#0f0f0f]'>
-                <p className='text-3xl text-white'>4</p>
-                <p className='text-[8px] text-[#333] tracking-[3px] mt-2'>CATEGORIES</p>
-              </div>
-              <div className='border border-[#1a1a1a] border-t-purple-500 border-t-2 p-4 bg-[#0f0f0f]'>
-                <p className='text-3xl text-purple-500'>ALL</p>
-                <p className='text-[8px] text-[#333] tracking-[3px] mt-2'>UNLOCKED</p>
-              </div>
-            </div>
+          
 
             {/* hire level */}
-            <div className='reveal flex items-center justify-between border border-[#1a1a1a] px-4 py-4 bg-[#0f0f0f]'>
-              <p className='text-[8px] text-[#333] tracking-[5px]'>LOADOUT STATUS</p>
-              <span className='text-[9px] text-purple-500 tracking-[3px] border border-purple-500/30 px-3 py-1'>
+            <div className='reveal flex items-center justify-between border border-[#1a1a1a] px-4 py-4 bg-[#0f0f0f] font-["Arial_Black"]'>
+              <p className='text-[10px] text-[#585454] tracking-[5px]'>LOADOUT STATUS</p>
+              <span className='text-[12px] text-purple-500 tracking-[3px] border border-purple-500/30 px-3 py-1'>
                 ● FULLY EQUIPPED
               </span>
             </div>

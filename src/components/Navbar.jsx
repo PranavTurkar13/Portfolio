@@ -1,5 +1,7 @@
+// src/components/Navbar.jsx
 import { useEffect, useRef, useState } from 'react';
 import gsap from "gsap";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const navItems = [
   { label: "Home", id: "home" },
@@ -10,11 +12,12 @@ const navItems = [
 ];
 
 const Navbar = () => {
-
   const navRef = useRef(null);
   const linksRef = useRef([]);
   const logoRef = useRef(null);
   const [active, setActive] = useState("Home");
+  const navigate = useNavigate();
+  const location = useLocation(); 
 
   useEffect(() => {
     gsap.fromTo(navRef.current, { y: -80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" });
@@ -33,53 +36,52 @@ const Navbar = () => {
   };
 
   const handleLogoLeave = () => {
-    gsap.to(logoRef.current, {  scale: 1, duration: 0.4, ease: "power2.inOut" });
+    gsap.to(logoRef.current, { scale: 1, duration: 0.4, ease: "power2.inOut" });
   };
 
   useEffect(() => {
-      const handleScroll = () => {
-        const sections = navItems.map(item =>
-          document.getElementById(item.id)
-        );
+    
+    if (location.pathname !== '/') return;
 
-        const scrollY = window.scrollY + 100; // offset for navbar
+    const handleScroll = () => {
+      const sections = navItems.map(item => document.getElementById(item.id));
+      const scrollY = window.scrollY + 100;
 
-        sections.forEach((section, index) => {
-          if (!section) return;
-
-          const top = section.offsetTop;
-          const height = section.offsetHeight;
-
-          if (scrollY >= top && scrollY < top + height) {
-            setActive(navItems[index].label);
-          }
-        });
-      };
-
-      window.addEventListener("scroll", handleScroll);
-
-      return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-    const handleLinkClick = (item, index) => {
-      setActive(item.label);
-
-      
-      gsap.fromTo(
-        linksRef.current[index],
-        { scale: 0.9 },
-        { scale: 1, duration: 0.3, ease: "back.out(2)" }
-      );
-
-      const section = document.getElementById(item.id);
-      if (section) {
-        gsap.to(window, {
-          duration: 1,
-          scrollTo: section,
-          ease: "power2.out",
-        });
-      }
+      sections.forEach((section, index) => {
+        if (!section) return;
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        if (scrollY >= top && scrollY < top + height) {
+          setActive(navItems[index].label);
+        }
+      });
     };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [location.pathname]);
+
+  const handleLinkClick = (item, index) => {
+    setActive(item.label);
+
+    gsap.fromTo(
+      linksRef.current[index],
+      { scale: 0.9 },
+      { scale: 1, duration: 0.3, ease: "back.out(2)" }
+    );
+
+    if (location.pathname !== '/') {
+      navigate(`/#${item.id}`);
+      // small delay to let page load then scroll
+      setTimeout(() => {
+        const section = document.getElementById(item.id);
+        if (section) section.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    } else {
+      const section = document.getElementById(item.id);
+      if (section) section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <nav
@@ -92,24 +94,27 @@ const Navbar = () => {
         borderBottom: "1px solid rgba(255, 255, 255, 0.15)",
       }}
     >
+      {/* Logo */}
       <div
         ref={logoRef}
         className="cursor-pointer"
         onMouseEnter={handleLogoHover}
         onMouseLeave={handleLogoLeave}
+        onClick={() => navigate('/')} 
       >
         <div className='logo flex gap-7'>
-            <div className='lines flex flex-col gap-2'>
-                <div className='line w-12 h-1 bg-white'></div>
-                <div className='line w-8 h-1 bg-white'></div>
-                <div className='line w-5 h-1 bg-white'></div>
-            </div>
-            <div className='name text-3xl text-white -mt-[7px]'>Rockstar</div>
+          <div className='lines flex flex-col gap-2'>
+            <div className='line w-12 h-1 bg-white'></div>
+            <div className='line w-8 h-1 bg-white'></div>
+            <div className='line w-5 h-1 bg-white'></div>
+          </div>
+          <div className='name text-3xl text-white -mt-[7px]'>Rockstar</div>
         </div>
       </div>
 
+      {/* Nav Links */}
       <ul className="flex items-center gap-8 list-none">
-        {navItems.map((item,index) => (
+        {navItems.map((item, index) => (
           <li
             key={index}
             ref={(el) => (linksRef.current[index] = el)}
@@ -117,7 +122,7 @@ const Navbar = () => {
             className="relative cursor-pointer"
           >
             <span
-              className="text-white tracking-wildest transition-colors duration-200"
+              className="text-white tracking-widest transition-colors duration-200"
               style={{
                 fontSize: "20px",
                 letterSpacing: "3px",
